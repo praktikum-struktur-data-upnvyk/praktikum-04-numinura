@@ -89,22 +89,84 @@ void tutupSemuaTab(CNode*& head) {
 
 // SOAL 1
 bool bukaHalaman(DNode*& head, DNode*& tail, int nomor) {
-    return false;
+    DNode *nodeBaru = new DNode();
+    nodeBaru->data = nomor;
+    nodeBaru->next = nullptr;
+
+      if (head == nullptr) {
+        head = tail = nodeBaru;
+    } else {
+        nodeBaru->prev = tail;
+        tail->next = nodeBaru;
+        tail = nodeBaru;
+    }
+    return true;
 }
 
 // SOAL 2
 int riwayatMundur(DNode* tail, int* keluaran) {
-    return 0;
+    DNode *tmp = nullptr;
+
+    if(tail == nullptr){
+        cout << "List Kosong !" << endl;
+    } else {
+        tmp = tail;
+        while(tmp != nullptr){
+            cout << tmp->data << " ";
+            tmp = tmp->prev;
+        }
+    }
+    cout << endl;
 }
 
 // SOAL 3
 bool hapusHalaman(DNode*& head, DNode*& tail, int nomor) {
-    return false;
+   DNode* p = head;
+
+    while (p != nullptr && p->data != nomor) {
+        p = p->next;
+    }
+
+    if (p == nullptr) {
+        return false;
+    }
+
+    if (p->prev != nullptr) {
+        p->prev->next = p->next;
+    } else {
+        head = p->next;
+    }
+
+    if (p->next != nullptr) {
+        p->next->prev = p->prev;
+    } else {
+        tail = p->prev;
+    }
+
+    delete p;
+    return true;
 }
 
 // SOAL 4
 bool bukaTab(CNode*& head, int nomor) {
-    return false;
+     CNode* nodeBaru = new CNode;
+    nodeBaru->data = nomor;
+
+    if (head == nullptr) {
+        head = nodeBaru;
+        nodeBaru->next = head;
+    } else {
+        CNode* p = head;
+
+        while (p->next != head) {
+            p = p->next;
+        }
+
+        p->next = nodeBaru;
+        nodeBaru->next = head;
+    }
+
+    return true;
 }
 
 // =============================================================================
